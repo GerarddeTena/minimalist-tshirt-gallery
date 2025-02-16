@@ -16,14 +16,6 @@
   }
 }
 
-@layer utilities {
-  .image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-  }
-}
-
 /* Smooth animation for image loading */
 img {
   opacity: 0;
@@ -39,11 +31,6 @@ img {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-/* Smooth transition for drag and drop states */
-.drag-active {
-  transform: scale(1.02);
 }
 
 /* Elegant hover effects */
