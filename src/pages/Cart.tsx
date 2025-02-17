@@ -1,12 +1,26 @@
 
 import { useEffect, useState } from "react";
 import { CartItem } from "@/types/cart";
-import { ArrowLeft, Trash2 } from "lucide-react";
+import { ArrowLeft, Trash2, Copy } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  // Spanish phone number and IBAN for Bizum payments
+  const paymentDetails = {
+    phone: "634 567 890",
+    iban: "ES91 2100 0418 4502 0005 1332"
+  };
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -31,19 +45,15 @@ const Cart = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast.success("Copied to clipboard!");
+  };
+
   const total = cartItems.reduce((sum, item) => {
     const price = parseFloat(item.price.replace("$", ""));
     return sum + price * item.quantity;
   }, 0);
-
-  const handleBizumPayment = () => {
-    // Here you would normally integrate with Bizum's API
-    // For now, we'll redirect to Bizum's website
-    window.location.href = "https://bizum.es/";
-    // Clear cart after payment
-    setCartItems([]);
-    localStorage.removeItem("cart");
-  };
 
   return (
     <div className="min-h-screen bg-black">
@@ -123,12 +133,56 @@ const Cart = () => {
                 <p className="text-white text-xl font-semibold">${total.toFixed(2)}</p>
               </div>
               
-              <button
-                onClick={handleBizumPayment}
-                className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors font-medium"
-              >
-                Pay with Bizum
-              </button>
+              <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                <DialogTrigger asChild>
+                  <button className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors font-medium">
+                    Pay with Bizum
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Payment Details</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium leading-none">Phone Number (Bizum)</label>
+                      <div className="flex items-center gap-2">
+                        <input
+                          readOnly
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2"
+                          value={paymentDetails.phone}
+                        />
+                        <button
+                          onClick={() => copyToClipboard(paymentDetails.phone)}
+                          className="p-2 hover:bg-accent rounded-md"
+                        >
+                          <Copy className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium leading-none">IBAN (Bank Transfer)</label>
+                      <div className="flex items-center gap-2">
+                        <input
+                          readOnly
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2"
+                          value={paymentDetails.iban}
+                        />
+                        <button
+                          onClick={() => copyToClipboard(paymentDetails.iban)}
+                          className="p-2 hover:bg-accent rounded-md"
+                        >
+                          <Copy className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Please include your order number in the payment reference.
+                      Your order will be processed once the payment is confirmed.
+                    </p>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         )}
