@@ -36,6 +36,15 @@ const Cart = () => {
     return sum + price * item.quantity;
   }, 0);
 
+  const handleBizumPayment = () => {
+    // Here you would normally integrate with Bizum's API
+    // For now, we'll redirect to Bizum's website
+    window.location.href = "https://bizum.es/";
+    // Clear cart after payment
+    setCartItems([]);
+    localStorage.removeItem("cart");
+  };
+
   return (
     <div className="min-h-screen bg-black">
       <nav className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-white/10 z-50">
@@ -108,11 +117,18 @@ const Cart = () => {
               </div>
             ))}
             
-            <div className="flex justify-end pt-4 border-t border-white/10">
+            <div className="flex flex-col gap-4 items-end pt-4 border-t border-white/10">
               <div className="text-right">
                 <p className="text-white/60 mb-1">Total</p>
                 <p className="text-white text-xl font-semibold">${total.toFixed(2)}</p>
               </div>
+              
+              <button
+                onClick={handleBizumPayment}
+                className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors font-medium"
+              >
+                Pay with Bizum
+              </button>
             </div>
           </div>
         )}
