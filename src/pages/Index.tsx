@@ -1,7 +1,20 @@
 
 import { ShoppingBag } from "lucide-react";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import { useEffect, useState } from "react";
+import { CartItem } from "@/types/cart";
 
 const Index = () => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCartItems(JSON.parse(savedCart));
+    }
+  }, []);
+
   // Static catalog items
   const tshirts = [
     {
@@ -30,15 +43,37 @@ const Index = () => {
     }
   ];
 
+  const addToCart = (tshirt: typeof tshirts[0]) => {
+    const updatedCart = [...cartItems];
+    const existingItem = updatedCart.find(item => item.id === tshirt.id);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      updatedCart.push({ ...tshirt, quantity: 1 });
+    }
+
+    setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    toast.success("Added to cart");
+  };
+
   return (
     <div className="min-h-screen bg-black">
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-white/10 z-50">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
           <h1 className="text-black font-semibold text-xl">MoronSinNorte</h1>
-          <div className="flex items-center gap-4">
-            <ShoppingBag className="w-6 h-6 text-black" />
-          </div>
+          <Link to="/cart" className="flex items-center gap-4">
+            <div className="relative">
+              <ShoppingBag className="w-6 h-6 text-black" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+                </span>
+              )}
+            </div>
+          </Link>
         </div>
       </nav>
 
@@ -55,7 +90,8 @@ const Index = () => {
           {tshirts.map((tshirt) => (
             <div
               key={tshirt.id}
-              className="group relative bg-white/5 rounded-lg overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="group relative bg-white/5 rounded-lg overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
+              onClick={() => addToCart(tshirt)}
             >
               <div className="aspect-square overflow-hidden">
                 <img
