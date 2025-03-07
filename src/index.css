@@ -33,6 +33,30 @@ img {
   }
 }
 
+/* Toast animation */
+@keyframes toastSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.animate-toast-slide {
+  animation: toastSlide 3s ease-in-out;
+}
+
 /* Elegant hover effects */
 .hover-lift {
   transition: transform 0.2s ease-in-out;

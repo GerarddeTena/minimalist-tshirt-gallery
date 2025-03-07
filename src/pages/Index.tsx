@@ -22,6 +22,12 @@ const Index = () => {
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
+    
+    // Load saved sizes from localStorage
+    const savedSizes = localStorage.getItem("selectedSizes");
+    if (savedSizes) {
+      setSelectedSizes(JSON.parse(savedSizes));
+    }
   }, []);
 
   // Static catalog items
@@ -53,14 +59,21 @@ const Index = () => {
   ];
 
   const handleSizeSelect = (tshirtId: number, size: string) => {
-    setSelectedSizes(prev => ({
-      ...prev,
+    // Update selected sizes
+    const updatedSizes = {
+      ...selectedSizes,
       [tshirtId]: size
-    }));
+    };
     
-    // Show the toast for 3 seconds
+    setSelectedSizes(updatedSizes);
+    
+    // Save selected sizes to localStorage
+    localStorage.setItem("selectedSizes", JSON.stringify(updatedSizes));
+    
+    // Show the toast with animation for 3 seconds
     toast.success(`Size ${size} selected`, {
       duration: 3000, // 3 seconds
+      className: "animate-toast-slide",
     });
   };
 
@@ -141,12 +154,13 @@ const Index = () => {
                   <DropdownMenuContent 
                     align="end" 
                     className="bg-black border border-white/10 text-white z-50 p-2 rounded-md shadow-lg"
+                    sideOffset={5}
                   >
                     {["XS", "S", "M", "L", "XL"].map((size) => (
                       <DropdownMenuItem 
                         key={size}
                         onClick={() => handleSizeSelect(tshirt.id, size)}
-                        className="cursor-pointer hover:bg-white/10 text-white px-4 py-2 rounded-sm text-sm"
+                        className="cursor-pointer focus:bg-white/10 focus:text-white hover:bg-white/10 hover:text-white px-4 py-2 rounded-sm text-sm"
                       >
                         {size}
                       </DropdownMenuItem>
