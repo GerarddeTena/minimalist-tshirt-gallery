@@ -181,6 +181,9 @@ const Cart = () => {
                       Please include your order number in the payment reference.
                       Your order will be processed once the payment is confirmed.
                     </p>
+                      <hr/>
+                      <b className={'text-red-600'}>For any questions, please send a DM to (@moronsinnorte).</b>
+
                   </div>
                 </DialogContent>
               </Dialog>

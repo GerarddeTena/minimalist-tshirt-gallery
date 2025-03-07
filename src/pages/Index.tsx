@@ -34,15 +34,15 @@ const Index = () => {
   const tshirts = [
     {
       id: 1,
-      name: "Blue T-Shirt",
-      image: "https://res.cloudinary.com/gamacloud/image/upload/v1741333555/Captura_de_pantalla_2025-03-07_081643_nvhbht.png",
-      price: "25.99€"
+      name: "Wave-mood T-Shirt",
+      image: "https://res.cloudinary.com/gamacloud/image/upload/v1741379880/Captura_de_pantalla_2025-03-07_081654-removebg-preview_dyzzs8.png",
+      price: "19.99€"
     },
     {
       id: 2,
-      name: "Gray T-Shirt",
-      image: "https://res.cloudinary.com/gamacloud/image/upload/v1741333555/Captura_de_pantalla_2025-03-07_081654_immmno.png",
-      price: "29.99€"
+      name: "Sunset vibe T-Shirt",
+      image: "https://res.cloudinary.com/gamacloud/image/upload/v1741379880/Captura_de_pantalla_2025-03-07_081643-removebg-preview_xq3ign.png",
+      price: "17.99€"
     },
     // {
     //   id: 3,
@@ -125,7 +125,7 @@ const Index = () => {
         </div>
 
         {/* T-Shirt Grid - Centered with max-width */}
-        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {tshirts.map((tshirt) => (
             <div
               key={tshirt.id}
