@@ -130,7 +130,7 @@ const Cart = () => {
             <div className="flex flex-col gap-4 items-end pt-4 border-t border-white/10">
               <div className="text-right">
                 <p className="text-white/60 mb-1">Total</p>
-                <p className="text-white text-xl font-semibold">${total.toFixed(2)}</p>
+                <p className="text-white text-xl font-semibold">{total.toFixed(2)}€</p>
               </div>
               
               <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>

@@ -19,28 +19,28 @@ const Index = () => {
   const tshirts = [
     {
       id: 1,
-      name: "Classic White Tee",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-      price: "$25.99"
+      name: "Blue T-Shirt",
+      image: "https://res.cloudinary.com/gamacloud/image/upload/v1741333555/Captura_de_pantalla_2025-03-07_081643_nvhbht.png",
+      price: "25.99€"
     },
     {
       id: 2,
-      name: "Urban Black",
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
-      price: "$29.99"
+      name: "Gray T-Shirt",
+      image: "https://res.cloudinary.com/gamacloud/image/upload/v1741333555/Captura_de_pantalla_2025-03-07_081654_immmno.png",
+      price: "29.99€"
     },
-    {
-      id: 3,
-      name: "Forest Green",
-      image: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843",
-      price: "$27.99"
-    },
-    {
-      id: 4,
-      name: "Mountain Gray",
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
-      price: "$26.99"
-    }
+    // {
+    //   id: 3,
+    //   name: "White T-Shirt",
+    //   image: "https://m.media-amazon.com/images/I/41uF42-1WwL._AC_SX466_.jpg",
+    //   price: "27.99€"
+    // },
+    // {
+    //   id: 4,
+    //   name: "Black T-Shirt",
+    //   image: "https://m.media-amazon.com/images/I/51rhQUe6tFL._AC_SX385_.jpg",
+    //   price: "26.99€"
+    // }
   ];
 
   const addToCart = (tshirt: typeof tshirts[0]) => {
@@ -62,13 +62,13 @@ const Index = () => {
     <div className="min-h-screen bg-black">
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-white/10 z-50">
-        <div className="container mx-auto px-4 h-full flex items-center justify-between">
+        <div className="container mx-auto h-full flex items-center justify-between">
           <h1 className="text-black font-semibold text-xl">MoronSinNorte</h1>
           <Link to="/cart" className="flex items-center gap-4">
             <div className="relative">
               <ShoppingBag className="w-6 h-6 text-black" />
               {cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="absolute -top-2 -right-0.5 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                   {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
                 </span>
               )}
@@ -81,16 +81,16 @@ const Index = () => {
       <main className="container mx-auto px-4 pt-24 pb-8">
         {/* Collection Title */}
         <div className="text-center mb-12">
-          <h2 className="text-white text-3xl font-semibold mb-2">Latest Collection</h2>
-          <p className="text-white/60">Discover our minimalist designs</p>
+          <h2 className="text-white text-3xl font-semibold mb-2">Mountain Collection</h2>
+          <p className="text-white/60">Discover our best trekking t-shirt designs</p>
         </div>
 
         {/* T-Shirt Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
           {tshirts.map((tshirt) => (
             <div
               key={tshirt.id}
-              className="group relative bg-white/5 rounded-lg overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
+              className="w-1/2 group bg-white/5 rounded-lg overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
               onClick={() => addToCart(tshirt)}
             >
               <div className="aspect-square overflow-hidden">
