@@ -4,9 +4,18 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { CartItem } from "@/types/cart";
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 
 const Index = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [selectedSizes, setSelectedSizes] = useState<Record<number, string>>({});
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -43,14 +52,26 @@ const Index = () => {
     // }
   ];
 
+  const handleSizeSelect = (tshirtId: number, size: string) => {
+    setSelectedSizes(prev => ({
+      ...prev,
+      [tshirtId]: size
+    }));
+    toast.success(`Size ${size} selected`);
+  };
+
   const addToCart = (tshirt: typeof tshirts[0]) => {
+    const size = selectedSizes[tshirt.id] || "M"; // Default to M if no size selected
+    
     const updatedCart = [...cartItems];
-    const existingItem = updatedCart.find(item => item.id === tshirt.id);
+    const existingItem = updatedCart.find(
+      item => item.id === tshirt.id && item.size === size
+    );
 
     if (existingItem) {
       existingItem.quantity += 1;
     } else {
-      updatedCart.push({ ...tshirt, quantity: 1 });
+      updatedCart.push({ ...tshirt, quantity: 1, size });
     }
 
     setCartItems(updatedCart);
@@ -85,24 +106,46 @@ const Index = () => {
           <p className="text-white/60">Discover our best trekking t-shirt designs</p>
         </div>
 
-        {/* T-Shirt Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
+        {/* T-Shirt Grid - Centered with max-width */}
+        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {tshirts.map((tshirt) => (
             <div
               key={tshirt.id}
-              className="w-1/2 group bg-white/5 rounded-lg overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
-              onClick={() => addToCart(tshirt)}
+              className="group bg-white/5 rounded-lg overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
             >
-              <div className="aspect-square overflow-hidden">
+              <div 
+                className="aspect-square overflow-hidden cursor-pointer"
+                onClick={() => addToCart(tshirt)}
+              >
                 <img
                   src={tshirt.image}
                   alt={tshirt.name}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <div className="p-4">
-                <h3 className="text-white font-medium mb-1">{tshirt.name}</h3>
-                <p className="text-white/60">{tshirt.price}</p>
+              <div className="p-4 flex justify-between items-center">
+                <div>
+                  <h3 className="text-white font-medium mb-1">{tshirt.name}</h3>
+                  <p className="text-white/60">{tshirt.price}</p>
+                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="border-white/20 text-white">
+                      {selectedSizes[tshirt.id] || "Size"} <ChevronDown className="ml-1 h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="bg-white">
+                    {["XS", "S", "M", "L", "XL"].map((size) => (
+                      <DropdownMenuItem 
+                        key={size}
+                        onClick={() => handleSizeSelect(tshirt.id, size)}
+                        className="cursor-pointer"
+                      >
+                        {size}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
           ))}
