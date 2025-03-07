@@ -70,10 +70,11 @@ const Index = () => {
     // Save selected sizes to localStorage
     localStorage.setItem("selectedSizes", JSON.stringify(updatedSizes));
     
-    // Show the toast with animation for 3 seconds
+    // Show the toast with improved animation for 3 seconds
     toast.success(`Size ${size} selected`, {
       duration: 3000, // 3 seconds
       className: "animate-toast-slide",
+      position: "top-center"
     });
   };
 
