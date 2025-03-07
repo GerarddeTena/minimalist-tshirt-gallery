@@ -97,6 +97,7 @@ const Cart = () => {
                 </div>
                 <div className="col-span-6 sm:col-span-8">
                   <h3 className="text-white font-medium mb-1">{item.name}</h3>
+                  <p className="text-white/60 mb-2">Size: {item.size}</p>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}

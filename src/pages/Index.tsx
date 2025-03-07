@@ -57,7 +57,11 @@ const Index = () => {
       ...prev,
       [tshirtId]: size
     }));
-    toast.success(`Size ${size} selected`);
+    
+    // Show the toast for 3 seconds
+    toast.success(`Size ${size} selected`, {
+      duration: 3000, // 3 seconds
+    });
   };
 
   const addToCart = (tshirt: typeof tshirts[0]) => {
