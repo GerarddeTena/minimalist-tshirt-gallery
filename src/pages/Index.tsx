@@ -134,12 +134,15 @@ const Index = () => {
                       {selectedSizes[tshirt.id] || "Size"} <ChevronDown className="ml-1 h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="bg-white">
+                  <DropdownMenuContent 
+                    align="end" 
+                    className="bg-black border border-white/10 text-white z-50 p-2 rounded-md shadow-lg"
+                  >
                     {["XS", "S", "M", "L", "XL"].map((size) => (
                       <DropdownMenuItem 
                         key={size}
                         onClick={() => handleSizeSelect(tshirt.id, size)}
-                        className="cursor-pointer"
+                        className="cursor-pointer hover:bg-white/10 text-white px-4 py-2 rounded-sm text-sm"
                       >
                         {size}
                       </DropdownMenuItem>
