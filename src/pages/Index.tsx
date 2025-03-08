@@ -35,15 +35,15 @@ const Index = () => {
     {
       id: 1,
       name: "Wave-mood T-Shirt",
-      image: "https://res.cloudinary.com/gamacloud/image/upload/v1741379880/Captura_de_pantalla_2025-03-07_081654-removebg-preview_dyzzs8.png",
+      image: "https://res.cloudinary.com/gamacloud/image/upload/v1741424879/Dise%C3%B1o_sin_t%C3%ADtulo__1_-removebg-preview_ljogfl.png",
       price: "19.99€"
-    },
-    {
-      id: 2,
-      name: "Sunset vibe T-Shirt",
-      image: "https://res.cloudinary.com/gamacloud/image/upload/v1741379880/Captura_de_pantalla_2025-03-07_081643-removebg-preview_xq3ign.png",
-      price: "17.99€"
-    },
+    }
+    // {
+    //   id: 2,
+    //   name: "Wave-mood T-Shirt - Reverse",
+    //   image: "https://res.cloudinary.com/gamacloud/image/upload/v1741379880/Captura_de_pantalla_2025-03-07_081643-removebg-preview_xq3ign.png",
+    //   price: "19.99€"
+    // },
     // {
     //   id: 3,
     //   name: "White T-Shirt",
@@ -102,7 +102,7 @@ const Index = () => {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-white/10 z-50">
         <div className="container mx-auto h-full flex items-center justify-between">
-          <h1 className="text-black font-semibold text-xl">MoronSinNorte</h1>
+          <h1 className="text-black font-semibold text-xl">MoronSenseNord</h1>
           <Link to="/cart" className="flex items-center gap-4">
             <div className="relative">
               <ShoppingBag className="w-6 h-6 text-black" />
@@ -120,19 +120,19 @@ const Index = () => {
       <main className="container mx-auto px-4 pt-24 pb-8">
         {/* Collection Title */}
         <div className="text-center mb-12">
-          <h2 className="text-white text-3xl font-semibold mb-2">Mountain Collection</h2>
-          <p className="text-white/60">Discover our best trekking t-shirt designs</p>
+          <h1 className="text-white text-2xl font-semibold mb-2">Mountain Collection</h1>
+          <p className="text-white/60">Flowing with feelings</p>
         </div>
 
         {/* T-Shirt Grid - Centered with max-width */}
-        <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="max-w-sm mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
           {tshirts.map((tshirt) => (
             <div
               key={tshirt.id}
               className="group bg-white/5 rounded-lg overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
             >
               <div 
-                className="aspect-square overflow-hidden cursor-pointer"
+                className="aspect-square overflow-hidden cursor-pointer max-w-sm"
                 onClick={() => addToCart(tshirt)}
               >
                 <img

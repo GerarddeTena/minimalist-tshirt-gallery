@@ -37,7 +37,7 @@ img {
 @keyframes toastSlide {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(100%);
   }
   15% {
     opacity: 1;
@@ -49,12 +49,12 @@ img {
   }
   100% {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-100%);
   }
 }
 
 .animate-toast-slide {
-  animation: toastSlide 3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  animation: toastSlideAdded 150ms ease-in-out forwards;
   pointer-events: none;
 }
 
@@ -65,4 +65,23 @@ img {
 
 .hover-lift:hover {
   transform: translateY(-2px);
+}
+
+@keyframes toastSlideAdded {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
 }
