@@ -18,8 +18,8 @@ const Cart = () => {
 
   // Spanish phone number and IBAN for Bizum payments
   const paymentDetails = {
-    phone: "634 567 890",
-    iban: "ES91 2100 0418 4502 0005 1332"
+    phone: "+34 641 667 344",
+    iban: `IBAN: ES27 1563 2626 3932 6433 6622`
   };
 
   useEffect(() => {
@@ -58,10 +58,10 @@ const Cart = () => {
   return (
     <div className="min-h-screen bg-black">
       <nav className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-white/10 z-50">
-        <div className="container mx-auto px-4 h-full flex items-center justify-between">
-          <Link to="/" className="text-black font-semibold text-xl flex items-center gap-2">
+        <div className="container mx-auto px-4 h-full flex justify-between items-center translate-y-[-15%]">
+          <Link to="/" className="w-52 items-center">
             <ArrowLeft className="w-5 h-5" />
-            MoronSinNorte
+            <img src='https://res.cloudinary.com/gamacloud/image/upload/v1741426691/logo-svg_revlsg.svg' alt='logo Sense nord copyRight tm'/>
           </Link>
         </div>
       </nav>
@@ -162,7 +162,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium leading-none">IBAN (Bank Transfer)</label>
+                      <label className="text-sm font-medium leading-none">Bank Transfer - Name: Xavier Moron Vila</label>
                       <div className="flex items-center gap-2">
                         <input
                           readOnly

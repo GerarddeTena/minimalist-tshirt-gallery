@@ -102,7 +102,7 @@ const Index = () => {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-white/10 z-50">
         <div className="container mx-auto h-full flex items-center justify-between">
-          <h1 className="text-black font-semibold text-xl">MoronSenseNord</h1>
+          <img className="max-w-60" src='https://res.cloudinary.com/gamacloud/image/upload/v1741426691/logo-svg_revlsg.svg' alt='logo Sense nord copyRight tm'/>
           <Link to="/cart" className="flex items-center gap-4">
             <div className="relative">
               <ShoppingBag className="w-6 h-6 text-black" />
