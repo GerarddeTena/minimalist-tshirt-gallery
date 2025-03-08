@@ -182,7 +182,7 @@ const Cart = () => {
                       Your order will be processed once the payment is confirmed.
                     </p>
                       <hr/>
-                      <b className={'text-red-600'}>For any questions, please send a DM to (@moronsinnorte).</b>
+                      <b className={'text-red-600'}>For any questions, please send a DM to (@xaviimoron).</b>
 
                   </div>
                 </DialogContent>
